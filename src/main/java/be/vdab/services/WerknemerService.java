@@ -8,5 +8,5 @@ public interface WerknemerService {
 	void update(Werknemer werknemer);
 	void delete(long id);
 	Iterable<Werknemer> findAll();
-	long findAantalWerknemers();
+//	long findAantalWerknemers();
 }

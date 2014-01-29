@@ -1,12 +1,17 @@
 package be.vdab.dao;
 
-import be.vdab.entities.Jobtitel;
+import java.util.List;
 
-public interface JobtitelDAO {
-	void create(Jobtitel jobtitel);
-	Jobtitel read(long id);
-	void update(Jobtitel jobtitel);
-	void delete(long id);
-	Iterable<Jobtitel> findAll();
-	long findAantalJobtitels();
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import be.vdab.entities.Jobtitel;
+import be.vdab.entities.Werknemer;
+
+public interface JobtitelDAO extends JpaRepository<Jobtitel, Long>{
+	//void create(Jobtitel jobtitel);
+	//Jobtitel read(long id);
+	//void delete(long id);
+	//Iterable<Jobtitel> findAll();
+	//void update(Werknemer werknemer);
+	//long findAantalJobtitels();
 }

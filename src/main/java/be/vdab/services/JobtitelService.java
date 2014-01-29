@@ -8,5 +8,5 @@ public interface JobtitelService {
 	void update(Jobtitel jobtitel);
 	void delete(long id);
 	Iterable<Jobtitel> findAll();
-	long findAantalJobtitels();
+//	long findAantalJobtitels();
 }

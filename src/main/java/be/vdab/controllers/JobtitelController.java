@@ -20,11 +20,11 @@ class JobtitelController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	ModelAndView findAll() {
-		return new ModelAndView("jobtitels/jobtitels", "jobtitels", jobtitelService.findAll());
+		return new ModelAndView("jobtitels", "jobtitels", jobtitelService.findAll());
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, params="id")
 	ModelAndView read(long id) {
-		return new ModelAndView("jobtitels/jobtitels", "jobtitel", jobtitelService.read(id)); 
+		return new ModelAndView("jobtitels", "jobtitel", jobtitelService.read(id)); 
 	}
 }

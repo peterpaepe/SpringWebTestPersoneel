@@ -2,12 +2,15 @@ package be.vdab.valueobjects;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class Email implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private static final String REG_EXPR = "^.+@.+\\.[a-z]+$";
+	
+	@Column(name = "email")
 	private final String adres;
 
 	public Email(){//default constructor voor JPA

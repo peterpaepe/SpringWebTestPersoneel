@@ -20,7 +20,7 @@ class WerknemerController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	ModelAndView findAll() {
-		return new ModelAndView("/werknemer",
-				"werknemers",werknemerService.findAll());
+		return new ModelAndView("werknemer",
+				"werknemers", werknemerService.findAll());
 	}
 }

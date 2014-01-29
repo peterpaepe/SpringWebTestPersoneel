@@ -45,7 +45,7 @@ public class Werknemer implements Serializable{
 	private Email email;
 	
 	@ManyToOne(fetch=FetchType.LAZY) 
-	@JoinColumn(name = "jobtitelId")
+	@JoinColumn(name = "jobtitelid")
 	private Jobtitel jobtitel;// TODO!!!
 
 	public Jobtitel getJobtitel() {
@@ -165,6 +165,13 @@ public class Werknemer implements Serializable{
 		this.salaris = salaris;
 	}
 
+	public void opslag(BigDecimal bedrag) {
+		bedrag = bedrag.add(getSalaris());
+		if (getSalaris().compareTo(bedrag) < 0) {
+			setSalaris(bedrag);
+		}
+	}	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

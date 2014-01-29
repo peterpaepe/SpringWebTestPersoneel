@@ -10,8 +10,12 @@
 		<link rel='stylesheet'   href='${contextPath}/styles/default.css'> 
 	</head>
 	<body>
-		<a href="<c:url value='/'/>"><fmt:message key='menu'/></a>
+<%-- 		<a href="<c:url value='/'/>"><fmt:message key='menu'/></a> --%>
 		<h1>Werknemer</h1>
 <%-- 		<spring:eval expression='werknemer.salaris'/> --%>
+
+		<c:forEach items='${werknemers}' var='werknemer'>
+				<div>${werknemer.familienaam}</div>
+		</c:forEach>
 	</body>
 </html>

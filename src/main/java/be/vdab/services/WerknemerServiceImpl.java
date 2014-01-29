@@ -50,7 +50,10 @@ class WerknemerServiceImpl implements WerknemerService {
 		return werknemerDAO.findAll(new Sort("familienaam", "voornaam"));//Er is een constructor van Sort die een variabel aantal eigenschappen (hier van de Werknemer class) aanvaardt en sorteert op die eigenschappen
 	}	
 	
-	
+	@Override
+	public Werknemer findPresident() {
+		return werknemerDAO.findPresident();
+	}
 //	@Override
 //	public long findAantalWerknemers() {
 //		return werknemerDAO.findAantalWerknemers();

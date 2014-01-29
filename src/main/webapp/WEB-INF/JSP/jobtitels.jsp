@@ -1,6 +1,7 @@
 <%@page contentType="text/html"	pageEncoding="UTF-8" session="false" trimDirectiveWhitespaces="true"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%> 
+<%@taglib prefix='spring' uri='http://www.springframework.org/tags'%>
 <c:set var='contextPath' value='${pageContext.servletContext.contextPath}' />
 <!doctype html>
 <html lang='nl'>
@@ -16,9 +17,9 @@
 		<nav>
 			<ul class="menu">
 				<c:forEach items="${jobtitels}" var="jobtitel" >
-					<c:url var="url" value="/jobtitels" >
-						<c:param name="id" value="${jobtitel.id}" />
-					</c:url>
+					<spring:url var='url' value='/jobtitels/{id}'>
+						<spring:param name='id' value='${jobtitel.id}' />
+					</spring:url>
 					<li><a href="${url}" title="${jobtitel.naam}">${jobtitel.naam}</a></li>
 				</c:forEach>
 			</ul>
@@ -30,10 +31,15 @@
 				</h2>
 				<c:forEach items="${jobtitel.werknemers}" var="werknemer" >
 					<ul>
-						<c:url var="url" value="/werknemers">
-							<c:param name="id" value="${werknemer.id}" />
-						</c:url>
-						<li><a href="${url}" title="${werknemer.naam}">${werknemer.naam}</a></li>
+
+						<spring:url var='url' value='/werknemer/{id}'>
+							<spring:param name='id' value='${werknemer.id}' />
+						</spring:url>
+
+<%-- 						<c:url var="url" value="/werknemer"> --%>
+<%-- 							<c:param name="id" value="${werknemer.id}" /> --%>
+<%-- 						</c:url> --%>
+						<li><a href="${url}" title="${werknemer.voornaam}&nbsp;${werknemer.familienaam}">${werknemer.voornaam}&nbsp;${werknemer.familienaam}</a></li>
 					</ul>
 				</c:forEach>
 			</section>

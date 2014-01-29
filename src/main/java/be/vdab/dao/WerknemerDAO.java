@@ -11,5 +11,5 @@ public interface WerknemerDAO extends JpaRepository<Werknemer, Long>{
 //	void update(Werknemer werknemer);
 //	Iterable<Werknemer>findAll();
 //	long findAantalWerknemers();
-	Iterable<Werknemer>findPresident();
+	Werknemer findPresident();
 }

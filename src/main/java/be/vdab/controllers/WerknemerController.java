@@ -18,9 +18,15 @@ class WerknemerController {
 		this.werknemerService = werknemerService;
 	}
 
+//	@RequestMapping(method = RequestMethod.GET)
+//	ModelAndView findAll() {
+//		return new ModelAndView("werknemer",
+//				"werknemers", werknemerService.findAll());
+//	}
+	
 	@RequestMapping(method = RequestMethod.GET)
 	ModelAndView findAll() {
 		return new ModelAndView("werknemer",
-				"werknemers", werknemerService.findAll());
+				"werknemer", werknemerService.findPresident());
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -23,7 +24,7 @@ public class Jobtitel implements Serializable{
 	@Size(min = 1, max=50, message="{Size.tekst}")
 	private String naam;
 	
-	@OneToMany(mappedBy = "jobtitel")
+	@OneToMany(mappedBy = "jobtitel", fetch = FetchType.EAGER)
 	private Set<Werknemer> werknemers;
 
 	public Set<Werknemer> getWerknemers() {

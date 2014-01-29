@@ -9,4 +9,5 @@ public interface WerknemerService {
 	void delete(long id);
 	Iterable<Werknemer> findAll();
 //	long findAantalWerknemers();
+	Werknemer findPresident();
 }

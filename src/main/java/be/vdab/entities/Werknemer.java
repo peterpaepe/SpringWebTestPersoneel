@@ -44,7 +44,7 @@ public class Werknemer implements Serializable{
 	@Embedded
 	private Email email;
 	
-	@ManyToOne(fetch=FetchType.LAZY) 
+	@ManyToOne(fetch=FetchType.EAGER) 
 	@JoinColumn(name = "jobtitelid")
 	private Jobtitel jobtitel;// TODO!!!
 
@@ -56,7 +56,7 @@ public class Werknemer implements Serializable{
 		this.jobtitel = jobtitel;
 	}	
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "chefid")
 	private Werknemer chef;
 
@@ -74,7 +74,7 @@ public class Werknemer implements Serializable{
 		}
 	}	
 
-	@OneToMany(mappedBy = "chef")
+	@OneToMany(mappedBy = "chef", fetch = FetchType.EAGER)
 	private Set<Werknemer> werknemers;
 
 	public Set<Werknemer> getWerknemers() {
@@ -149,6 +149,10 @@ public class Werknemer implements Serializable{
 		this.voornaam = voornaam;
 	}
 
+	public String getNaam() {
+		return voornaam + ' ' + familienaam;
+	}	
+	
 	public Email getEmail() {
 		return email;
 	}

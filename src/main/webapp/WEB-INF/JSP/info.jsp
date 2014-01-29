@@ -4,7 +4,7 @@
 <!doctype html>
 <html lang='nl'>
 	<head>
-		<title>Info</title>
+		<title>Personeel - Spring 4.0 Test - Info</title>
 		<link rel='stylesheet'
 			href='${pageContext.servletContext.contextPath}/styles/default.css'>
 	</head>

@@ -2,12 +2,11 @@
 	pageEncoding="UTF-8" session="false" trimDirectiveWhitespaces="true"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
-<c:set var='contextPath'
-	value='${pageContext.servletContext.contextPath}' />
+<c:set var='contextPath' value='${pageContext.servletContext.contextPath}' />
 <!doctype html>
 <html lang='nl'>
 <head>
-<title>Personeel - Opslag</title>
+<title>Personeel - Spring 4.0 Test - Opslag</title>
 <link rel='stylesheet' href='${contextPath}/stylesheets/default.css' />
 </head>
 <body>

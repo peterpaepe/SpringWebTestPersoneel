@@ -4,7 +4,7 @@
 <!doctype html>
 <html lang="${pageContext.response.locale.language}">
 	<head>
-		<title>Personeel - Spring Test - Welkom</title>
+		<title>Personeel - Spring 4.0 Test - Welkom</title>
 		<link rel='stylesheet'   href='${pageContext.servletContext.contextPath}/styles/default.css'> 
 	</head>
 	<body>

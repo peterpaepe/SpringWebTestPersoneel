@@ -1,6 +1,7 @@
 <%@page contentType="text/html"	pageEncoding="UTF-8" session="false" trimDirectiveWhitespaces="true"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
+<%@taglib prefix='spring' uri='http://www.springframework.org/tags'%>
 <c:set var='contextPath' value='${pageContext.servletContext.contextPath}' />
 <!doctype>
 <html lang='nl'>
@@ -9,9 +10,9 @@
 <link rel='stylesheet' href='${contextPath}/styles/default.css' />
 </head>
 <body>
+	<a href="<c:url value='/'/>"><fmt:message key='menu'/></a>
 	<header>
 		<h1>Werknemer ${werknemer.naam}</h1>
-<!-- 		<h1>Werknemer</h1> -->
 	</header>
 	<section>
 		<p>
@@ -32,30 +33,37 @@
 		</p>
 		<c:if test="${not empty werknemer.chef}">
 			<p>
-				Chef<br /> <span class="bold"> <c:url
-						value="/werknemershiërarchy.htm" var="id">
-						<c:param name="werknemerID" value="${werknemer.chef.id}" />
-					</c:url><a href="${id}"
-					title="${werknemer.chef.voornaam}&nbsp;${werknemer.chef.familienaam}">${werknemer.chef.voornaam}&nbsp;${werknemer.chef.familienaam}</a></span>
-
+				Chef<br />  
+				<spring:url value='/werknemer/{id}' var='url'>
+					<spring:param name='id' value='${werknemer.chef.id}' />
+				</spring:url>
+				<span class="bold">
+					<a href="${url}"
+						title="${werknemer.chef.naam}">${werknemer.chef.naam}
+					</a>
+				</span>
+				
 			</p>
 		</c:if>
 		<c:if test="${not empty werknemer.werknemers}">
 			<p>
 				Ondergeschikten<br />
 				<c:forEach var="werknemer" items="${werknemer.werknemers}">
-					<c:url value="/werknemershiërarchy.htm" var="id">
-						<c:param name="werknemerID" value="${werknemer.id}" />
-					</c:url>
-					<span class="bold"><a href="${id}"
-						title="${werknemer.voornaam}&nbsp;${werknemer.familienaam}">${werknemer.voornaam}&nbsp;${werknemer.familienaam}</a></span>
+					<spring:url value='/werknemer/{id}' var='url'>
+						<spring:param name='id' value='${werknemer.id}' />
+					</spring:url>
+					<span class="bold">
+						<a href="${url}"
+							title="${werknemer.naam}">${werknemer.naam}
+						</a>
+					</span>
 					<br />
 				</c:forEach>
 			</p>
 		</c:if>
 		<p>
 			Foto<br /> <img src="${contextPath}/images/${werknemer.id}.jpg"
-				alt="${werknemer.voornaam}&nbsp;${werknemer.familienaam}" />
+				alt="${werknemer.naam}" />
 		</p>
 		<p>
 			<c:url value="/opslag.htm" var="id">

@@ -177,7 +177,7 @@ public class Werknemer implements Serializable{
 	}	
 	
 	@Override
-	public int hashCode() {
+	public int hashCode() {//TODO hash
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
@@ -185,7 +185,7 @@ public class Werknemer implements Serializable{
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) {//TODO equals
 		if (this == obj)
 			return true;
 		if (obj == null)

@@ -2,6 +2,7 @@ package be.vdab.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,4 +30,10 @@ class WerknemerController {
 		return new ModelAndView("werknemer",
 				"werknemer", werknemerService.findPresident());
 	}
+	
+	@RequestMapping(value="{id}", method = RequestMethod.GET)//@RequestMapping(method = RequestMethod.GET, params="id")
+	ModelAndView read(@PathVariable long id) {//	ModelAndView read(long id) {
+		ModelAndView modelAndView = new ModelAndView("werknemer", "werknemer", werknemerService.read(id));
+		return modelAndView;
+	}	
 }

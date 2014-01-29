@@ -34,7 +34,7 @@ class WerknemerServiceImpl implements WerknemerService {
 	}
 
 	@Override
-	@Transactional(readOnly = false)
+	@Transactional(readOnly = false)//TODO locken!!!
 	public void update(Werknemer werknemer) {
 		werknemerDAO.save(werknemer);//werknemerDAO.update(werknemer);
 	}

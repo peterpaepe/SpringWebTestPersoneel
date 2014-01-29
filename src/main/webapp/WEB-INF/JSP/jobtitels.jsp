@@ -6,7 +6,7 @@
 <!doctype html>
 <html lang='nl'>
 	<head>
-		<title>Personeel - Spring Test - Jobtitels</title>
+		<title>Personeel - Spring 4.0 Test - Jobtitels</title>
 		<link rel='stylesheet'	href='${contextPath}/styles/default.css'>
 	</head>
 	<body>
@@ -31,15 +31,10 @@
 				</h2>
 				<c:forEach items="${jobtitel.werknemers}" var="werknemer" >
 					<ul>
-
 						<spring:url var='url' value='/werknemer/{id}'>
 							<spring:param name='id' value='${werknemer.id}' />
 						</spring:url>
-
-<%-- 						<c:url var="url" value="/werknemer"> --%>
-<%-- 							<c:param name="id" value="${werknemer.id}" /> --%>
-<%-- 						</c:url> --%>
-						<li><a href="${url}" title="${werknemer.voornaam}&nbsp;${werknemer.familienaam}">${werknemer.voornaam}&nbsp;${werknemer.familienaam}</a></li>
+						<li><a href="${url}" title="${werknemer.naam}">${werknemer.naam}</a></li>
 					</ul>
 				</c:forEach>
 			</section>

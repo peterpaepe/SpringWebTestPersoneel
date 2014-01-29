@@ -8,9 +8,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -38,18 +38,37 @@ public class CreateDAOBeans {
 		return dataSource;
 	}
 	
-	@Bean
-	JdbcTemplate jdbcTemplate() {
-		return new JdbcTemplate(dataSource());
-	}
-
-	@Bean
-	NamedParameterJdbcTemplate namedJdbcTemplate() {
-		return new NamedParameterJdbcTemplate(dataSource());
+//	@Bean
+//	JdbcTemplate jdbcTemplate() {
+//		return new JdbcTemplate(dataSource());
+//	}
+//
+//	@Bean
+//	NamedParameterJdbcTemplate namedJdbcTemplate() {
+//		return new NamedParameterJdbcTemplate(dataSource());
+//	}
+	
+	@Bean 
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {   
+		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = 
+				new LocalContainerEntityManagerFactoryBean();   
+		entityManagerFactoryBean.setDataSource(dataSource()); //(1) De bean dataSource bevat de connection pool naar de database.  Je injecteert deze bean in de huidige bean.  De huidige bean beheert de JPA EntityManagerFactory.  De huidige bean configureert deze EntityManagerFactory  zodat hij connecties haalt uit de connection pool van de bean dataSource. 
+		entityManagerFactoryBean.setPackagesToScan(     
+				"be.vdab.entities", "be.vdab.valueobjects"); //(2) Je moet in persistence.xml de entity classes en de value object classes  één per één vermelden. Je moet in de huidige bean enkel de packages vermelden die entities of value object classes bevatten. Dit is minder werk. Je vermeldt deze packages in een property packagesToScan.  
+		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();//(3)De class HibernateJpaVendorAdapter stelt de configuratie van één specifieke JPA implementatie (Hibernate) voor.
+		vendorAdapter.setShowSql(     
+				environment.getProperty("database.showSql", Boolean.class)); //(4)Je plaatst de Hibernate eigenschap showSQL op true (vanuit database.properties) Je ziet zo welke SQL statements Hibernate naar de database stuurt.   
+		entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter); //(5)   
+		return entityManagerFactoryBean;		
 	}
 	
+//	@Bean
+//	DataSourceTransactionManager transactionManager() {
+//		return new DataSourceTransactionManager(dataSource());
+//	}
+	
 	@Bean
-	DataSourceTransactionManager transactionManager() {
-		return new DataSourceTransactionManager(dataSource());
+	JpaTransactionManager transactionManager() {// (1)Je vervangt de class DataSourceTransactionManager (die bij JDBC hoort)  door de class JPATransactionManager (die bij JPA hoort). 
+		return new JpaTransactionManager(entityManagerFactory().getObject());//Je verbindt de JPATransactionManager met je entityManager die je krijgt van de EntityManagerFactoryBean method getObject. 
 	}
 }

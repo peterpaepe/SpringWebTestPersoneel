@@ -4,16 +4,11 @@
 <!doctype html>
 <html lang="${pageContext.response.locale.language}">
 	<head>
-		<title>Personeel - Spring Test - Welcome</title>
+		<title>Personeel - Spring Test - Welkom</title>
 		<link rel='stylesheet'   href='${pageContext.servletContext.contextPath}/styles/default.css'> 
 	</head>
 	<body>
 		<h1><fmt:message key='menu'/></h1>
-		<nav>
-			<ul>
-				<li><a href="<c:url value='/werknemer'/>">Werknemershiërarchie</a></li>
-				<li><a href="<c:url value='/jobtitels'/>">Jobtitels</a></li>
-			</ul>
-		</nav>
+		<c:import url='/WEB-INF/JSP/menu.jsp'/> 
 	</body>
 </html>

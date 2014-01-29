@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -17,7 +18,8 @@ class JobtitelDAOImpl implements JobtitelDAO {
 	private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	private final JobtitelRowMapper jobtitelRowMapper = new JobtitelRowMapper();
 	private static final String BEGIN_SQL = "SELECT id, naam FROM jobtitels ";
-	private static final String SQL_FIND_ALL = BEGIN_SQL + "ORDER BY naam"; 
+	private static final String SQL_FIND_ALL = BEGIN_SQL + "ORDER BY naam";
+	private static final String SQL_READ = BEGIN_SQL + "WHERE id = ?";
 			
 	@Autowired
 	JobtitelDAOImpl(JdbcTemplate jdbcTemplate,
@@ -31,12 +33,13 @@ class JobtitelDAOImpl implements JobtitelDAO {
 		// TODO Auto-generated method stub
 	}
 
-
-
 	@Override
 	public Jobtitel read(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return jdbcTemplate.queryForObject(SQL_READ, jobtitelRowMapper, id);
+		} catch (IncorrectResultSizeDataAccessException ex){
+			return null;
+		}
 	}
 
 	@Override

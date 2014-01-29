@@ -1,11 +1,14 @@
 package be.vdab.services;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import be.vdab.dao.WerknemerDAO;
 import be.vdab.entities.Werknemer;
 
 @Service// met deze annotation maak je een Spring bean van deze class
+@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 class WerknemerServiceImpl implements WerknemerService {
 	private final WerknemerDAO werknemerDAO;
 
@@ -18,6 +21,7 @@ class WerknemerServiceImpl implements WerknemerService {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void create(Werknemer werknemer) {
 		werknemerDAO.create(werknemer);
 	}
@@ -28,11 +32,13 @@ class WerknemerServiceImpl implements WerknemerService {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void update(Werknemer werknemer) {
 		werknemerDAO.update(werknemer);
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void delete(long id) {
 		werknemerDAO.delete(id);
 	}

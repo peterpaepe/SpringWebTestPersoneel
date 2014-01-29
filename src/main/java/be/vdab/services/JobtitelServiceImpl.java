@@ -8,7 +8,7 @@ import be.vdab.dao.JobtitelDAO;
 import be.vdab.entities.Jobtitel;
 
 @Service// met deze annotation maak je een Spring bean van deze class
-@Transactional(readOnly = true,isolation = Isolation.READ_COMMITTED)
+@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 class JobtitelServiceImpl implements JobtitelService {
 	private final JobtitelDAO jobtitelDAO;
 	

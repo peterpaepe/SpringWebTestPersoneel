@@ -4,11 +4,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import be.vdab.entities.Jobtitel;
 import be.vdab.entities.Werknemer;
 import be.vdab.valueobjects.Email;
 
@@ -18,7 +20,8 @@ class WerknemerDAOImpl implements WerknemerDAO {
 	private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	private final WerknemerRowMapper werknemerRowMapper = new WerknemerRowMapper();
 	private static final String BEGIN_SQL = "SELECT id, voornaam, familienaam FROM werknemers ";
-	private static final String SQL_FIND_ALL = BEGIN_SQL + "ORDER BY voornaam, familienaam"; 
+	private static final String SQL_FIND_ALL = BEGIN_SQL + "ORDER BY voornaam, familienaam";
+	private static final String SQL_READ = BEGIN_SQL + "WHERE id = ?";
 			
 	@Autowired
 	WerknemerDAOImpl(JdbcTemplate jdbcTemplate,
@@ -35,8 +38,11 @@ class WerknemerDAOImpl implements WerknemerDAO {
 
 	@Override
 	public Werknemer read(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return jdbcTemplate.queryForObject(SQL_READ, werknemerRowMapper, id);
+		} catch (IncorrectResultSizeDataAccessException ex){
+			return null;
+		}
 	}
 
 	@Override

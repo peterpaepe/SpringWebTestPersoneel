@@ -1,25 +1,21 @@
 <%@page contentType="text/html"
 	pageEncoding="UTF-8" session="false" trimDirectiveWhitespaces="true"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%> 
 <c:set var='contextPath'
 	value='${pageContext.servletContext.contextPath}' />
 <!doctype html>
-<html lang='nl'>
-<head>
-<title>Personeel - Pagina niet gevonden</title>
-<link rel='stylesheet' href='${contextPath}/styles/default.css' />
-</head>
-<body>
-	<nav>
-		<h1>
-			<a href="${contextPath}/index.jsp">Hoofdpagina</a>
-		</h1>
-	</nav>
-	<header>
-		<h1>Pagina niet gevonden</h1>
-	</header>
-	<section>
+<html lang="${pageContext.response.locale.language}">
+	<head>
+		<title>Personeel - Spring 4.0 Test - Info</title>
+		<link rel='stylesheet'
+			href='${pageContext.servletContext.contextPath}/styles/default.css'>
+	</head>
+	<body>
+		<a href="<c:url value='/'/>">Menu</a>
+		<header>
+			<h1>Pagina niet gevonden</h1>
+		</header>		
 		<p class="fouten">De pagina die u zocht bestaat helaas niet op	deze website.</p>
-	</section>
-</body>
+	</body>
 </html>

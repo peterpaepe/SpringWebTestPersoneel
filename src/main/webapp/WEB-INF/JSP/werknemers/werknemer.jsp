@@ -11,63 +11,71 @@
 </head>
 <body>
 	<a href="<c:url value='/'/>"><fmt:message key='menu'/></a>
-	<header>
-		<h1>Werknemer ${werknemer.naam}</h1>
-	</header>
-	<section>
-		<p>
-			Voornaam<br /> <span class="bold">${werknemer.voornaam}</span>
-		</p>
-		<p>
-			Familienaam<br /> <span class="bold">${werknemer.familienaam}</span>
-		</p>
-		<p>
-			Email adres<br /> <span class="bold">${werknemer.email}</span>
-		</p>
-		<p>
-			Salaris<br /> <span class="bold"><spring:eval expression="werknemer.salaris"/></span>
-		</p>
-		<p>
-			Jobtitel<br /> <span class="bold">${werknemer.jobtitel.naam}</span>
-		</p>
-		<c:if test="${not empty werknemer.chef}">
+	<c:choose>
+	<c:when test="${not empty werknemer.naam}">
+		<header>
+			<h1>Werknemer ${werknemer.naam}</h1>
+		</header>
+		<section>
 			<p>
-				Chef<br />  
-				<spring:url value='/werknemers/{id}' var='url'>
-					<spring:param name='id' value='${werknemer.chef.id}' />
-				</spring:url>
-				<span class="bold">
-					<a href="${url}"
-						title="${werknemer.chef.naam}">${werknemer.chef.naam}
-					</a>
-				</span>
-				
+				Voornaam<br /> <span class="bold">${werknemer.voornaam}</span>
 			</p>
-		</c:if>
-		<c:if test="${not empty werknemer.werknemers}">
 			<p>
-				Ondergeschikten<br />
-				<c:forEach var="werknemer" items="${werknemer.werknemers}">
+				Familienaam<br /> <span class="bold">${werknemer.familienaam}</span>
+			</p>
+			<p>
+				Email adres<br /> <span class="bold">${werknemer.email}</span>
+			</p>
+			<p>
+				Salaris<br /> <span class="bold"><spring:eval expression="werknemer.salaris"/></span>
+			</p>
+			<p>
+				Jobtitel<br /> <span class="bold">${werknemer.jobtitel.naam}</span>
+			</p>
+			<c:if test="${not empty werknemer.chef}">
+				<p>
+					Chef<br />  
 					<spring:url value='/werknemers/{id}' var='url'>
-						<spring:param name='id' value='${werknemer.id}' />
+						<spring:param name='id' value='${werknemer.chef.id}' />
 					</spring:url>
 					<span class="bold">
 						<a href="${url}"
-							title="${werknemer.naam}">${werknemer.naam}
+							title="${werknemer.chef.naam}">${werknemer.chef.naam}
 						</a>
 					</span>
-					<br />
-				</c:forEach>
+					
+				</p>
+			</c:if>
+			<c:if test="${not empty werknemer.werknemers}">
+				<p>
+					Ondergeschikten<br />
+					<c:forEach var="werknemer" items="${werknemer.werknemers}">
+						<spring:url value='/werknemers/{id}' var='url'>
+							<spring:param name='id' value='${werknemer.id}' />
+						</spring:url>
+						<span class="bold">
+							<a href="${url}"
+								title="${werknemer.naam}">${werknemer.naam}
+							</a>
+						</span>
+						<br />
+					</c:forEach>
+				</p>
+			</c:if>
+			<p>
+				Foto<br /> <img src="${contextPath}/images/pasfotoswerknemers/${werknemer.id}.jpg"
+					alt="${werknemer.naam}" title="${werknemer.naam}"/>
 			</p>
-		</c:if>
-		<p>
-			Foto<br /> <img src="${contextPath}/images/pasfotoswerknemers/${werknemer.id}.jpg"
-				alt="${werknemer.naam}" />
-		</p>
-		<spring:url value="/werknemers/{id}/opslag" var="opslagURL">
-			<spring:param name="id" value="${werknemer.id}"/>
-		</spring:url>
-		<p><a href="${opslagURL}">Opslag</a></p>
-	</section>
+			<spring:url value="/werknemers/{id}/opslag" var="opslagURL">
+				<spring:param name="id" value="${werknemer.id}"/>
+			</spring:url>
+			<p><a href="${opslagURL}">Opslag</a></p>
+		</section>
+	</c:when> 
+	<c:otherwise>
+		<br>
+		<div class="fouten">Werknemer niet gevonden!</div> 
+	</c:otherwise>
+	 </c:choose>
 </body>
 </html>

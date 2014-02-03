@@ -20,13 +20,11 @@ public class Initializer extends
 	
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		// TODO Auto-generated method stub
 		return  new Class<?>[] { CreateDAOBeans.class, CreateServiceBeans.class };
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {//Je geeft in deze method aan welke classes de Java Config code bevatten voor je controller beans
-		// TODO Auto-generated method stub
 		return new Class<?>[] { CreateControllerBeans.class };
 	}
 	
@@ -35,6 +33,5 @@ public class Initializer extends
 		characterEncodingFilter.setEncoding("UTF-8"); //(2)   
 		return new Filter[] { characterEncodingFilter,   new OpenEntityManagerInViewFilter(),   new HiddenHttpMethodFilter()}; 
 	}
-	
 
 }

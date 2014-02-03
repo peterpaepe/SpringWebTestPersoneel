@@ -11,7 +11,6 @@ class OpslagForm {
 	private BigDecimal salaris;
 	
 	OpslagForm(){
-		
 	}
 	
 	OpslagForm(BigDecimal salaris){

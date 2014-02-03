@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,15 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.Valid;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.NumberFormat;
-
-import be.vdab.valueobjects.Email;
 
 @Entity @Table(name = "werknemers" )
 public class Werknemer implements Serializable{
@@ -39,17 +35,12 @@ public class Werknemer implements Serializable{
 	@Size(min = 1, max=50, message="{Size.tekst}")
 	private String voornaam;
 	
-//	@Valid
-//	@Size(max=50)
-//	@Embedded
-//	private Email email;
-	
 	@Size(max=50)
 	private String email;
 	
 	@ManyToOne(fetch=FetchType.LAZY) 
 	@JoinColumn(name = "jobtitelid")
-	private Jobtitel jobtitel;// TODO!!!
+	private Jobtitel jobtitel;
 
 	public Jobtitel getJobtitel() {
 		return jobtitel;
@@ -77,7 +68,7 @@ public class Werknemer implements Serializable{
 		}
 	}	
 
-	@OneToMany(mappedBy = "chef", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "chef", fetch = FetchType.LAZY)
 	private Set<Werknemer> werknemers;
 
 	public Set<Werknemer> getWerknemers() {
@@ -110,7 +101,6 @@ public class Werknemer implements Serializable{
 	private BigDecimal salaris;
 	
 	public Werknemer() {
-//		email = new Email();
 		jobtitel = new Jobtitel();
 		werknemers = new HashSet<Werknemer>();
 	}
@@ -155,14 +145,6 @@ public class Werknemer implements Serializable{
 	public String getNaam() {
 		return voornaam + ' ' + familienaam;
 	}	
-	
-//	public Email getEmail() {
-//		return email;
-//	}
-//
-//	public void setEmail(Email email) {
-//		this.email = email;
-//	}
 
 	public String getEmail() {
 		return email;
@@ -199,7 +181,7 @@ public class Werknemer implements Serializable{
 	public int hashCode() {
 		return Long.toString(id).hashCode();
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Werknemer [id=" + id + ", familienaam=" + familienaam

@@ -1,5 +1,9 @@
 package be.vdab.services;
 
+import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -12,7 +16,7 @@ import be.vdab.entities.Werknemer;
 @Transactional(readOnly = true)//@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)//De JPA standaard ondersteunt het instellen van transaction isolation levels niet.
 class WerknemerServiceImpl implements WerknemerService {
 	private final WerknemerDAO werknemerDAO;
-
+	
 	protected WerknemerServiceImpl() {
 		this.werknemerDAO = null;
 	}
@@ -24,13 +28,13 @@ class WerknemerServiceImpl implements WerknemerService {
 
 	@Override
 	public Werknemer read(long id) {
-		return werknemerDAO.findOne(id);//return werknemerDAO.read(id);
+		return werknemerDAO.findOne(id);
 	}
 
 	@Override
-	@Transactional(readOnly = false)//TODO locken!!!
+	@Transactional(readOnly = false)
 	public void update(Werknemer werknemer) {
-		werknemerDAO.save(werknemer);//werknemerDAO.update(werknemer);
+		werknemerDAO.save(werknemer);
 	}
 
 	@Override

@@ -24,11 +24,11 @@ public class Jobtitel implements Serializable{
 	@Size(min = 1, max=50, message="{Size.tekst}")
 	private String naam;
 	
-	@OneToMany(mappedBy = "jobtitel", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "jobtitel", fetch = FetchType.LAZY)
 	private Set<Werknemer> werknemers;
 
 	public Set<Werknemer> getWerknemers() {
-		return Collections.unmodifiableSet(werknemers);//TODO!!!
+		return Collections.unmodifiableSet(werknemers);
 	}
 
 	public void addWerknemer(Werknemer werknemer) {
@@ -67,21 +67,11 @@ public class Jobtitel implements Serializable{
 		this.naam = naam;
 	}
 	
-	/*
-	public long getPresident() {
-		for (Werknemer werknemer : werknemers) {
-			if (String.valueOf(werknemer.getId()).isEmpty()) {
-				return werknemer.getId();
-			}
-		}
-		return 1;
-	}*/
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((naam == null) ? 0 : naam.hashCode());
+		result = prime * result + ((naam == null) ? 0 : naam.toUpperCase().hashCode());
 		return result;
 	}
 	
@@ -97,7 +87,7 @@ public class Jobtitel implements Serializable{
 		if (naam == null) {
 			if (other.naam != null)
 				return false;
-		} else if (!naam.equals(other.naam))
+		} else if (!naam.equalsIgnoreCase(other.naam))
 			return false;
 		return true;
 	}

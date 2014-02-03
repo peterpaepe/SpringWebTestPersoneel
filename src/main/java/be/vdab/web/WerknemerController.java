@@ -24,12 +24,6 @@ class WerknemerController {
 	WerknemerController(WerknemerService werknemerService) {
 		this.werknemerService = werknemerService;
 	}
-
-//	@RequestMapping(method = RequestMethod.GET)
-//	ModelAndView findAll() {
-//		return new ModelAndView("werknemer",
-//				"werknemers", werknemerService.findAll());
-//	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	ModelAndView findAll() {
@@ -44,7 +38,7 @@ class WerknemerController {
 	
 	
 	@RequestMapping(value="{id}/opslag", method = RequestMethod.GET)
-	public ModelAndView showEmployeeToRaise(@PathVariable long id){
+	public ModelAndView getOpslag(@PathVariable long id){
 		ModelAndView modelAndView = new ModelAndView("werknemers/opslag");//		ModelAndView modelAndView = new ModelAndView("werknemers/opslag");
 		modelAndView.addObject("werknemer", werknemerService.read(id));
 		modelAndView.addObject("opslagForm", new OpslagForm());
@@ -52,7 +46,7 @@ class WerknemerController {
 	}
 	
 	@RequestMapping(value="{id}", method = RequestMethod.PUT)
-	public ModelAndView raiseEmployee(@Valid OpslagForm opslagForm, BindingResult bindingResult, @PathVariable long id){
+	public ModelAndView putOpslag(@Valid OpslagForm opslagForm, BindingResult bindingResult, @PathVariable long id){
 		ModelAndView modelAndView = new ModelAndView("/werknemers/opslag");//		ModelAndView modelAndView = new ModelAndView("/werknemers/opslag");
 		if(!bindingResult.hasErrors()){
 			Werknemer werknemer = werknemerService.read(id);

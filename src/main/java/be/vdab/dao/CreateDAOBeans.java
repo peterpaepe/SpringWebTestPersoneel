@@ -40,16 +40,6 @@ public class CreateDAOBeans {
 		return dataSource;
 	}
 	
-//	@Bean
-//	JdbcTemplate jdbcTemplate() {
-//		return new JdbcTemplate(dataSource());
-//	}
-//
-//	@Bean
-//	NamedParameterJdbcTemplate namedJdbcTemplate() {
-//		return new NamedParameterJdbcTemplate(dataSource());
-//	}
-	
 	@Bean 
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {   
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = 
@@ -63,11 +53,6 @@ public class CreateDAOBeans {
 		entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter); //(5)   
 		return entityManagerFactoryBean;		
 	}
-	
-//	@Bean
-//	DataSourceTransactionManager transactionManager() {
-//		return new DataSourceTransactionManager(dataSource());
-//	}
 	
 	@Bean
 	JpaTransactionManager transactionManager() {// (1)Je vervangt de class DataSourceTransactionManager (die bij JDBC hoort)  door de class JPATransactionManager (die bij JPA hoort). 

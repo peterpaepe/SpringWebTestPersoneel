@@ -4,7 +4,7 @@
 <%@taglib prefix='spring' uri='http://www.springframework.org/tags'%>
 <c:set var='contextPath' value='${pageContext.servletContext.contextPath}' />
 <!doctype>
-<html lang='nl'>
+<html lang='${pageContext.response.locale.language}'>
 <head>
 <title>Personeel - Spring 4.0 Test - Werknemershi&euml;rarchy</title>
 <link rel='stylesheet' href='${contextPath}/styles/default.css' />
@@ -25,8 +25,7 @@
 			Email adres<br /> <span class="bold">${werknemer.email}</span>
 		</p>
 		<p>
-			Salaris<br /> <span class="bold"><fmt:formatNumber
-					value="${werknemer.salaris}" /></span>
+			Salaris<br /> <span class="bold"><spring:eval expression="werknemer.salaris"/></span>
 		</p>
 		<p>
 			Jobtitel<br /> <span class="bold">${werknemer.jobtitel.naam}</span>
@@ -34,7 +33,7 @@
 		<c:if test="${not empty werknemer.chef}">
 			<p>
 				Chef<br />  
-				<spring:url value='/werknemer/{id}' var='url'>
+				<spring:url value='/werknemers/{id}' var='url'>
 					<spring:param name='id' value='${werknemer.chef.id}' />
 				</spring:url>
 				<span class="bold">
@@ -49,7 +48,7 @@
 			<p>
 				Ondergeschikten<br />
 				<c:forEach var="werknemer" items="${werknemer.werknemers}">
-					<spring:url value='/werknemer/{id}' var='url'>
+					<spring:url value='/werknemers/{id}' var='url'>
 						<spring:param name='id' value='${werknemer.id}' />
 					</spring:url>
 					<span class="bold">
@@ -62,15 +61,13 @@
 			</p>
 		</c:if>
 		<p>
-			Foto<br /> <img src="${contextPath}/images/${werknemer.id}.jpg"
+			Foto<br /> <img src="${contextPath}/images/pasfotoswerknemers/${werknemer.id}.jpg"
 				alt="${werknemer.naam}" />
 		</p>
-		<p>
-			<c:url value="/opslag.htm" var="id">
-				<c:param name="werknemerID" value="${werknemer.id}" />
-			</c:url>
-			<a href="${id}" title="Opslag">Opslag</a>
-		</p>
+		<spring:url value="/werknemers/{id}/opslag" var="opslagURL">
+			<spring:param name="id" value="${werknemer.id}"/>
+		</spring:url>
+		<p><a href="${opslagURL}">Opslag</a></p>
 	</section>
 </body>
 </html>

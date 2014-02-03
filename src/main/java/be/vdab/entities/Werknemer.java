@@ -39,12 +39,15 @@ public class Werknemer implements Serializable{
 	@Size(min = 1, max=50, message="{Size.tekst}")
 	private String voornaam;
 	
-	@Valid
-	@Size(max=50)
-	@Embedded
-	private Email email;
+//	@Valid
+//	@Size(max=50)
+//	@Embedded
+//	private Email email;
 	
-	@ManyToOne(fetch=FetchType.EAGER) 
+	@Size(max=50)
+	private String email;
+	
+	@ManyToOne(fetch=FetchType.LAZY) 
 	@JoinColumn(name = "jobtitelid")
 	private Jobtitel jobtitel;// TODO!!!
 
@@ -56,7 +59,7 @@ public class Werknemer implements Serializable{
 		this.jobtitel = jobtitel;
 	}	
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "chefid")
 	private Werknemer chef;
 
@@ -103,23 +106,23 @@ public class Werknemer implements Serializable{
 	@NotNull
 	@DecimalMin("0")
 	@Digits(integer = 10, fraction = 2)
-	@NumberFormat(pattern="#,##")
+	@NumberFormat(pattern = "#,##0.00 €")
 	private BigDecimal salaris;
 	
 	public Werknemer() {
-		email = new Email();
+//		email = new Email();
 		jobtitel = new Jobtitel();
 		werknemers = new HashSet<Werknemer>();
 	}
 
-	public Werknemer(String familienaam, String voornaam, Email email, BigDecimal salaris) {
+	public Werknemer(String familienaam, String voornaam, String email, BigDecimal salaris) {
 		setFamilienaam(familienaam);
 		setVoornaam(voornaam);
 		setEmail(email);
 		setSalaris(salaris);		
 	}
 	
-	public Werknemer(Long id, String familienaam, String voornaam, Email email,
+	public Werknemer(Long id, String familienaam, String voornaam, String email,
 						BigDecimal salaris) {
 		this(familienaam, voornaam, email, salaris);
 		setId(id);
@@ -153,14 +156,22 @@ public class Werknemer implements Serializable{
 		return voornaam + ' ' + familienaam;
 	}	
 	
-	public Email getEmail() {
+//	public Email getEmail() {
+//		return email;
+//	}
+//
+//	public void setEmail(Email email) {
+//		this.email = email;
+//	}
+
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(Email email) {
+	public void setEmail(String email) {
 		this.email = email;
-	}
-
+	}	
+	
 	public BigDecimal getSalaris() {
 		return salaris;
 	}
@@ -177,25 +188,16 @@ public class Werknemer implements Serializable{
 	}	
 	
 	@Override
-	public int hashCode() {//TODO hash
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Werknemer)) {
+			return false;
+		}
+		return ((Werknemer) obj).id == this.id;
 	}
 
 	@Override
-	public boolean equals(Object obj) {//TODO equals
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Werknemer other = (Werknemer) obj;
-		if (id != other.id)
-			return false;
-		return true;
+	public int hashCode() {
+		return Long.toString(id).hashCode();
 	}
 
 	@Override

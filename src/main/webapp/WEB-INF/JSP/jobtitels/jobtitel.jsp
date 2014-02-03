@@ -4,7 +4,7 @@
 <%@taglib prefix='spring' uri='http://www.springframework.org/tags'%>
 <c:set var='contextPath' value='${pageContext.servletContext.contextPath}' />
 <!doctype html>
-<html lang='nl'>
+<html lang='${pageContext.response.locale.language}'>
 	<head>
 		<title>Personeel - Spring 4.0 Test - Jobtitels</title>
 		<link rel='stylesheet'	href='${contextPath}/styles/default.css'>
@@ -31,7 +31,7 @@
 				</h2>
 				<c:forEach items="${jobtitel.werknemers}" var="werknemer" >
 					<ul>
-						<spring:url var='url' value='/werknemer/{id}'>
+						<spring:url var='url' value='/werknemers/{id}'>
 							<spring:param name='id' value='${werknemer.id}' />
 						</spring:url>
 						<li><a href="${url}" title="${werknemer.naam}">${werknemer.naam}</a></li>

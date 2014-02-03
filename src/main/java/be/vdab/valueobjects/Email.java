@@ -41,6 +41,8 @@ public class Email implements Serializable{
 		return adres.toUpperCase().hashCode();
 	}
 	
+	
+	
 	@Override
 	public String toString(){
 		return adres;

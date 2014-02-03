@@ -1,4 +1,4 @@
-package be.vdab.controllers;
+package be.vdab.web;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan("be.vdab.controllers")//Je definieert controller beans met @Controller. Je geeft aan dat Spring één bean moet maken voor elke class met de annotation @Controller in de package be.vdab.controllers.
+@ComponentScan("be.vdab.web")//Je definieert controller beans met @Controller. Je geeft aan dat Spring één bean moet maken voor elke class met de annotation @Controller in de package be.vdab.controllers.
 public class CreateControllerBeans extends WebMvcConfigurationSupport {//De class WebMvcConfigurationSupport initialiseert Spring MVC.
 	
 	@Override

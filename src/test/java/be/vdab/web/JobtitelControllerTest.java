@@ -1,4 +1,4 @@
-package be.vdab.controllers;
+package be.vdab.web;
 
 import java.util.Collections;
 
@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 
 import be.vdab.entities.Jobtitel;
 import be.vdab.services.JobtitelService;
+import be.vdab.web.JobtitelController;
 
 public class JobtitelControllerTest {
 	private JobtitelService jobtitelService;

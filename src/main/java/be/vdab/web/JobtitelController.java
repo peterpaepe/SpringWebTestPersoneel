@@ -1,4 +1,4 @@
-package be.vdab.controllers;
+package be.vdab.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,12 +21,12 @@ class JobtitelController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	ModelAndView findAll() {
-		return new ModelAndView("jobtitels", "jobtitels", jobtitelService.findAll());
+		return new ModelAndView("jobtitels/jobtitel", "jobtitels", jobtitelService.findAll());
 	}
 	
 	@RequestMapping(value="{id}", method = RequestMethod.GET)//@RequestMapping(method = RequestMethod.GET, params="id")
 	ModelAndView read(@PathVariable long id) {//	ModelAndView read(long id) {
-		ModelAndView modelAndView = new ModelAndView("jobtitels", "jobtitels", jobtitelService.findAll());
+		ModelAndView modelAndView = new ModelAndView("jobtitels/jobtitel", "jobtitels", jobtitelService.findAll());
 		modelAndView.addObject("jobtitel", jobtitelService.read(id));
 		return modelAndView;
 	}

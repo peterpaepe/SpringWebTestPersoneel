@@ -79,7 +79,7 @@ class WerknemerDAOImplOLD {//class WerknemerDAOImplOLD implements WerknemerDAO {
 			return new Werknemer( resultSet.getLong("id"),
 					resultSet.getString("familienaam"),
 					resultSet.getString("voornaam"),
-					new Email(resultSet.getString("email")),
+					resultSet.getString("email"),
 					resultSet.getBigDecimal("salaris"));
 		}
 	}	

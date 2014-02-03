@@ -1,5 +1,10 @@
-package be.vdab.controllers;
+package be.vdab.web;
 
+import javax.servlet.Filter;
+
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import be.vdab.dao.CreateDAOBeans;
@@ -24,5 +29,12 @@ public class Initializer extends
 		// TODO Auto-generated method stub
 		return new Class<?>[] { CreateControllerBeans.class };
 	}
+	
+	@Override protected Filter[] getServletFilters() { //(1)   
+		CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();   
+		characterEncodingFilter.setEncoding("UTF-8"); //(2)   
+		return new Filter[] { characterEncodingFilter,   new OpenEntityManagerInViewFilter(),   new HiddenHttpMethodFilter()}; 
+	}
+	
 
 }

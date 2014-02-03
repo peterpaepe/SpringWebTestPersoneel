@@ -4,7 +4,7 @@
 <header>
 	<nav>
 		<ul>
-			<li><a href="<c:url value='/werknemer'/>"><fmt:message key='werknemershiërarchie'/></a></li>
+			<li><a href="<c:url value='/werknemers'/>"><fmt:message key='werknemershiërarchie'/></a></li>
 			<li><a href="<c:url value='/jobtitels'/>"><fmt:message key='jobtitels'/></a></li>
 		</ul>
 	</nav>

@@ -46,7 +46,7 @@ public class CreateDAOBeans {
 				new LocalContainerEntityManagerFactoryBean();   
 		entityManagerFactoryBean.setDataSource(dataSource()); //(1) De bean dataSource bevat de connection pool naar de database.  Je injecteert deze bean in de huidige bean.  De huidige bean beheert de JPA EntityManagerFactory.  De huidige bean configureert deze EntityManagerFactory  zodat hij connecties haalt uit de connection pool van de bean dataSource. 
 		entityManagerFactoryBean.setPackagesToScan(     
-				"be.vdab.entities", "be.vdab.valueobjects"); //(2) Je moet in persistence.xml de entity classes en de value object classes  één per één vermelden. Je moet in de huidige bean enkel de packages vermelden die entities of value object classes bevatten. Dit is minder werk. Je vermeldt deze packages in een property packagesToScan.  
+				"be.vdab.entities");//, "be.vdab.valueobjects"); //(2) Je moet in persistence.xml de entity classes en de value object classes  één per één vermelden. Je moet in de huidige bean enkel de packages vermelden die entities of value object classes bevatten. Dit is minder werk. Je vermeldt deze packages in een property packagesToScan.  
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();//(3)De class HibernateJpaVendorAdapter stelt de configuratie van één specifieke JPA implementatie (Hibernate) voor.
 		vendorAdapter.setShowSql(     
 				environment.getProperty("database.showSql", Boolean.class)); //(4)Je plaatst de Hibernate eigenschap showSQL op true (vanuit database.properties) Je ziet zo welke SQL statements Hibernate naar de database stuurt.   

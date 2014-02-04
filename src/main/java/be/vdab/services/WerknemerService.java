@@ -6,5 +6,5 @@ public interface WerknemerService {
 	Werknemer read(long id);
 	void update(Werknemer werknemer);
 	Iterable<Werknemer> findAll();
-	Werknemer findPresident();
+	Werknemer findByChefIdIsNull();//Werknemer findPresident();
 }

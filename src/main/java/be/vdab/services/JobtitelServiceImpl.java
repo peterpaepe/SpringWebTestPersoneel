@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import be.vdab.dao.JobtitelDAO;
 import be.vdab.entities.Jobtitel;
+import be.vdab.exceptions.JobtitelNietGevondenException;
 
 @Service// met deze annotation maak je een Spring bean van deze class
 @Transactional(readOnly = true)//@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
@@ -24,9 +25,13 @@ class JobtitelServiceImpl implements JobtitelService {
 
 	@Override
 	public Jobtitel read(long id) {
-		return jobtitelDAO.findOne(id);
+		Jobtitel jobtitel = jobtitelDAO.findOne(id);
+		if (jobtitel == null){
+			throw new JobtitelNietGevondenException();
+		}
+		return jobtitel;
 	}
-
+	
 	@Override
 	public Iterable<Jobtitel> findAll() {
 		return jobtitelDAO.findAll(new Sort("naam"));

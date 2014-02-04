@@ -168,19 +168,32 @@ public class Werknemer implements Serializable{
 			setSalaris(bedrag);
 		}
 	}	
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof Werknemer)) {
-			return false;
-		}
-		return ((Werknemer) obj).id == this.id;
-	}
 
 	@Override
 	public int hashCode() {
-		return Long.toString(id).hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.toUpperCase().hashCode());
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Werknemer other = (Werknemer) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equalsIgnoreCase(other.email))
+			return false;
+		return true;
+	}	
+	
 	
 	@Override
 	public String toString() {
@@ -189,5 +202,6 @@ public class Werknemer implements Serializable{
 				+ jobtitel + ", chef=" + chef + ", werknemers=" + werknemers
 				+ ", salaris=" + salaris + "]";
 	}
+
 
 }

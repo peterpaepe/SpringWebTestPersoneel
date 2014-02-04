@@ -34,7 +34,7 @@ public class JobtitelControllerTest {
 	
 	@Test
 	public void readActiveertJuisteView(){
-		Assert.assertEquals("jobtitels/jobtitels", jobtitelController.read(1L).getViewName());
+		Assert.assertEquals("jobtitels/jobtitels", jobtitelController.read("1").getViewName());
 	}	
 	
 	@Test
@@ -44,11 +44,11 @@ public class JobtitelControllerTest {
 	
 	@Test
 	public void readMetBestaandeIDGeeftJobtitelTerug(){
-		Assert.assertSame(jobtitel, jobtitelController.read(1L).getModelMap().get("jobtitel"));
+		Assert.assertSame(jobtitel, jobtitelController.read("1").getModelMap().get("jobtitel"));
 	}
 	
 	@Test
 	public void readMetOnbestaandeIDGeeftNullTerug(){
-		Assert.assertNull(jobtitelController.read(999999999L).getModelMap().get("jobtitel"));
+		Assert.assertNull(jobtitelController.read("999999999").getModelMap().get("jobtitel"));
 	}
 }

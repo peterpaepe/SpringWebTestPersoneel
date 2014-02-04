@@ -13,6 +13,7 @@ import be.vdab.services.JobtitelService;
 @RequestMapping("/jobtitels")
 class JobtitelController {
 	private final JobtitelService jobtitelService;
+	private long jobtitelId;
 	
 	@Autowired // met deze annotation injecteert Spring de parameter filiaalService met de bean die de interface FiliaalService implementeert: FiliaalServiceImpl
 	JobtitelController(JobtitelService jobtitelService) {
@@ -24,10 +25,17 @@ class JobtitelController {
 		return new ModelAndView("jobtitels/jobtitel", "jobtitels", jobtitelService.findAll());
 	}
 	
-	@RequestMapping(value="{id}", method = RequestMethod.GET)//@RequestMapping(method = RequestMethod.GET, params="id")
-	ModelAndView read(@PathVariable long id) {//	ModelAndView read(long id) {
-		ModelAndView modelAndView = new ModelAndView("jobtitels/jobtitel", "jobtitels", jobtitelService.findAll());
-		modelAndView.addObject("jobtitel", jobtitelService.read(id));
-		return modelAndView;
+	@RequestMapping(value="{id}", method = RequestMethod.GET)
+	ModelAndView read(@PathVariable String id) {
+		try{
+			jobtitelId = Long.parseLong(id);
+			ModelAndView modelAndView = new ModelAndView("jobtitels/jobtitel", "jobtitels", jobtitelService.findAll());
+			modelAndView.addObject("jobtitel", jobtitelService.read(jobtitelId));
+			return modelAndView;
+		}
+		catch(Exception ex){
+			return new ModelAndView("redirect:/404");
+		}
 	}
+	
 }

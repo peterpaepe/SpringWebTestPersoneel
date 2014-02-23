@@ -26,7 +26,7 @@
 				</spring:url>
 				<form:form method='put' action="${opslagURL}" commandName="opslagForm">
 					<div><form:label path="salaris">Bedrag</form:label></div>
-					<div><form:input path="salaris"/>&nbsp;<form:errors path="salaris"/></div>
+					<div><form:input path="salaris" autofocus="autofocus" />&nbsp;<form:errors path="salaris"/></div>
 					<input type="submit" value="Opslag"/>						
 				</form:form>
 			</div>

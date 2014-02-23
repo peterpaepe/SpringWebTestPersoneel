@@ -6,6 +6,11 @@ nav {
 
 body {
 	font-family: Verdana;
+	background-color: #C2E0FF;
+	background-image: url("../images/logo.png");
+	background-repeat: no-repeat;
+	background-position: right top;
+	margin-right: 200px;
 }
 
 input[type="submit"] {
@@ -36,4 +41,15 @@ section {
 
 .bold {
 	font-weight: bold;
+}
+
+.container {
+	text-align: center;
+}
+
+.center_div {
+	width: 60%;
+/* 	background-color: #d0f0f6; */
+	text-align: left;
+	padding: 8px;
 }

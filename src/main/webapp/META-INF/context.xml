@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <Context>
+<!-- 
 <Resource name='jdbc/personeel'
 auth='Container' type='javax.sql.DataSource'
 username='root' password='vdab'
@@ -7,4 +8,5 @@ driverClassName='com.mysql.jdbc.Driver'
 url='jdbc:mysql://localhost/personeel'
 factory='org.apache.tomcat.jdbc.pool.DataSourceFactory'
 validationInterval='60000' validationQuery='select 1' testOnBorrow='true' />
+ -->
 </Context>

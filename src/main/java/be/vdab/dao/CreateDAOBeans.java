@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
@@ -17,7 +18,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 @Configuration
 @ComponentScan("be.vdab.dao")//Je geeft aan dat Spring één bean moet maken per class met de annotation @Repository in de package be.vdab.dao
-//@PropertySource("classpath:/database.properties")
+@PropertySource("classpath:/database.properties")
 @EnableJpaRepositories(basePackageClasses={CreateDAOBeans.class})//Je geeft bij basePackageClasses een class mee. Spring data zoekt alle DAO interface in de package waartoe deze class behoort en maakt zelf implementatieclasses van deze interfaces.
 public class CreateDAOBeans {
 	private final Logger logger = Logger.getLogger(this.getClass().getName());
@@ -44,7 +45,7 @@ public class CreateDAOBeans {
 	
 	@Bean
 	DataSource dataSource() {
-		return new JndiDataSourceLookup().getDataSource("java:comp/env/jdbc/personeel");
+		return new JndiDataSourceLookup().getDataSource("jdbc/personeel");//return new JndiDataSourceLookup().getDataSource("java:comp/env/jdbc/personeel");
 	}
 	
 	
